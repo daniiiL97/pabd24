@@ -1,10 +1,21 @@
 """House price prediction service"""
 
+from dotenv import dotenv_values
 from flask import Flask, request
 from flask_cors import CORS
+from joblib import load
+from flask_httpauth import HTTPTokenAuth
 
 app = Flask(__name__)
 CORS(app)
+
+config = dotenv_values(".env")
+auth = HTTPTokenAuth(scheme='Bearer')
+
+tokens = {
+    config['APP_TOKEN']: "user1",
+}
+model = load('models/linear_regression_v01.joblib')
 
 
 def predict(in_data: dict) -> int:
@@ -15,8 +26,8 @@ def predict(in_data: dict) -> int:
     :rtype: int
     """
     area = float(in_data['area'])
-    AVG_PRICE = 200_000                 # RUB / m2
-    return int(area * AVG_PRICE)
+    price = model.predict([[area]])[0]
+    return int(price)
 
 
 @app.route("/")
@@ -25,6 +36,7 @@ def home():
 
 
 @app.route("/predict", methods=['POST'])
+@auth.login_required
 def predict_web_serve():
     """Dummy service"""
     in_data = request.get_json()
