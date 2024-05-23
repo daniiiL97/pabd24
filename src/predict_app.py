@@ -18,6 +18,11 @@ tokens = {
 model = load('models/linear_regression_v01.joblib')
 
 
+@auth.verify_token
+def verify_token(token):
+    if token in tokens:
+        return tokens[token]
+
 def predict(in_data: dict) -> int:
     """ Predict house price from input data parameters.
     :param in_data: house parameters.
