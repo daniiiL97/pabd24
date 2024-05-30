@@ -8,6 +8,7 @@ endpoint = 'http://192.144.14.184:5000/predict'
 HEADERS = {"Authorization": f"Bearer {config['APP_TOKEN']}"}
 
 
+
 def do_request(area: int) -> str:
     data = {'area': area}
     t0 = time.time()
