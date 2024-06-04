@@ -1,0 +1,6 @@
+[core]
+    remote = storage
+['remote "storage"']
+    url = s3://pabd24/14/dwsstore
+    endpointurl = https://storage.yandexcloud.net
+

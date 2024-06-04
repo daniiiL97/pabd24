@@ -1,0 +1,6 @@
+outs:
+- md5: 79aba04ea176879c03955e1f9643ce2c.dir
+  size: 33634
+  nfiles: 2
+  hash: md5
+  path: proc
