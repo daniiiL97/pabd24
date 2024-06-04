@@ -1,0 +1,15 @@
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\dan44\PycharmProjects\pabd24\pabd24\test\test_parallel.py", line 30, in <module>
+    test_10()
+  File "C:\Users\dan44\PycharmProjects\pabd24\pabd24\test\test_parallel.py", line 26, in test_10
+    print(*p.map(do_request, range(10, 110, 10)))
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\pool.py", line 367, in map
+    return self._map_async(func, iterable, mapstar, chunksize).get()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.11_3.11.2544.0_x64__qbz5n2kfra8p0\Lib\multiprocessing\pool.py", line 774, in get
+    raise self._value
+requests.exceptions.ConnectionError: ('Connection aborted.', RemoteDisconnected('Remote end closed connection without response'))
+(.venv) PS C:\Users\dan44\PycharmProjects\pabd24\pabd24>
