@@ -6,6 +6,9 @@ from flask_cors import CORS
 from joblib import load
 from flask_httpauth import HTTPTokenAuth
 
+#5000 - flask
+#8000 - gunicorn
+
 app = Flask(__name__)
 CORS(app)
 
