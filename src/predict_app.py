@@ -1,5 +1,4 @@
 """House price prediction service"""
-
 from dotenv import dotenv_values
 from flask import Flask, request
 from flask_cors import CORS
@@ -18,7 +17,7 @@ auth = HTTPTokenAuth(scheme='Bearer')
 tokens = {
     config['APP_TOKEN']: "user1",
 }
-model = load('models/linear_regression_v01.joblib')
+model = load('models/random_forest.joblib')
 
 
 @auth.verify_token
@@ -33,7 +32,7 @@ def predict(in_data: dict) -> int:
     :return: House price, RUB.
     :rtype: int
     """
-    area = float(in_data['area'])
+    area = float(in_data['total_meters'])
     price = model.predict([[area]])[0]
     return int(price)
 

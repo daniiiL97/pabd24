@@ -28,8 +28,11 @@ def main(args):
         df = pd.DataFrame(data)
         main_dataframe = pd.concat([main_dataframe, df], axis=0)
 
-    main_dataframe = main_dataframe.sample(frac=1).reset_index(drop=True) #перемешивание df
 
+    main_dataframe = main_dataframe.sample(frac=1).reset_index(drop=True) #перемешивание df
+    df = main_dataframe
+    df['first_floor'] = df['floor'] == 1
+    df['last_floor'] = df['floor'] == df['floors_count']
     main_dataframe['url_id'] = main_dataframe['url'].map(lambda x: x.split('/')[-2])
     new_dataframe = main_dataframe[['url_id', 'total_meters', 'price']].set_index('url_id')
 

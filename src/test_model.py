@@ -14,7 +14,7 @@ logging.basicConfig(
     format='%(asctime)s %(message)s')
 
 VAL_DATA = 'data/proc/val.csv'
-MODEL_PATH = 'models/linear_regression_v01.joblib'
+MODEL_PATH = 'models/random_forest.joblib'
 
 
 def validate_model(model_path, data_path):
@@ -27,11 +27,11 @@ def validate_model(model_path, data_path):
     mae = mean_absolute_error(y_val, y_pred)
 
     r2 = model.score(x_val, y_val)
-    c = int(model.coef_[0])
-    inter = int(model.intercept_)
+   # c = int(model.coef_[0])
+    #inter = int(model.intercept_)
 
     logger.info(f'Validation completed: R2 = {r2:.3f}, MAE = {mae:.0f}')
-    logger.info(f'Predictive formula: Price = {c} * area + {inter}')
+    #logger.info(f'Predictive formula: Price = {c} * area + {inter}')
 
 
 
