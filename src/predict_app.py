@@ -17,7 +17,7 @@ auth = HTTPTokenAuth(scheme='Bearer')
 tokens = {
     config['APP_TOKEN']: "user1",
 }
-model = load('models/random_forest.joblib')
+model = load('models/catboost.joblib')
 
 
 @auth.verify_token
@@ -32,9 +32,18 @@ def predict(in_data: dict) -> int:
     :return: House price, RUB.
     :rtype: int
     """
-    area = float(in_data['total_meters'])
-    price = model.predict([[area]])[0]
-    return int(price)
+    rooms_count = int(in_data['rooms_count'])
+    author_type = str(in_data['author_type'])
+    floor = int(in_data['floor'])
+    street = str(in_data['street'])
+    underground = str(in_data['underground'])
+    floors_count = int(in_data['floors_count'])
+    district = str(in_data['district'])
+    total_meters = float(in_data['total_meters'])
+
+    price = model.predict([[rooms_count, author_type, floor, street, underground, floors_count,district, total_meters]])[0]
+
+    return int(price.squeeze())
 
 
 @app.route("/")

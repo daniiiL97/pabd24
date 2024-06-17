@@ -12,8 +12,11 @@ logging.basicConfig(
 
 
 IN_FILES = ['data/raw/1_2024-05-14_20-16.csv',
+            "data/raw/1_2024-06-16_22-53.csv",
             'data/raw/2_2024-05-14_20-36.csv',
-            'data/raw/3_2024-05-14_20-54.csv']
+            "data/raw/2_2024-06-16_22-59.csv",
+            'data/raw/3_2024-05-14_20-54.csv',
+            "data/raw/3_2024-06-16_23-08.csv"]
 
 OUT_TRAIN = 'data/proc/train.csv'
 OUT_VAL = 'data/proc/val.csv'
@@ -34,10 +37,11 @@ def main(args):
     df['first_floor'] = df['floor'] == 1
     df['last_floor'] = df['floor'] == df['floors_count']
     main_dataframe['url_id'] = main_dataframe['url'].map(lambda x: x.split('/')[-2])
-    new_dataframe = main_dataframe[['url_id', 'total_meters', 'price']].set_index('url_id')
+    new_dataframe = main_dataframe[['url_id',  'rooms_count', 'author_type', 'floor', 'street',
+       'underground', 'floors_count', 'district', 'total_meters','price']].set_index('url_id')
 
     new_df = new_dataframe[new_dataframe['price'] < 30_000_000]
-
+    new_df =new_df.dropna()
     border = int(args.split * len(new_df))
     train_df, val_df = new_df[0:border], new_df[border:-1]
     train_df.to_csv(OUT_TRAIN)

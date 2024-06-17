@@ -24,8 +24,29 @@ input:valid {
 <h1>House price predict app</h1>
 
 <form>
-  <label for="area">Area, m2:</label><br>
-  <input type="number" id="area" name="area" required min="1" max="100" value="44"><br><br>
+  <label for="total_meters">total_meters, m2:</label><br>
+  <input type="number" id="total_meters" name="total_meters" required min="1" max="100" value="44"><br><br>
+  <label for="rooms_count">Rooms Count:</label><br>
+  <input type="number" id="rooms_count" name="rooms_count" required min="1" value="1"><br><br>
+
+  <label for="author_type">Author Type:</label><br>
+  <input type="text" id="author_type" name="author_type" required><br><br>
+
+  <label for="floor">Floor:</label><br>
+  <input type="number" id="floor" name="floor" required min="1" value="1"><br><br>
+
+  <label for="street">Street:</label><br>
+  <input type="text" id="street" name="street" required><br><br>
+
+  <label for="underground">Underground:</label><br>
+  <input type="text" id="underground" name="underground" required><br><br>
+
+  <label for="floors_count">Floors Count:</label><br>
+  <input type="number" id="floors_count" name="floors_count" required min="1" value="1"><br><br>
+
+  <label for="district">District:</label><br>
+  <input type="text" id="district" name="district" required><br><br>
+
   <label for="token">Enter secret token</label><br>
   <input type="string" id="token" name="token" required><br><br>
   <input type="submit" value="Submit" id="submit_btn" >
@@ -40,18 +61,18 @@ input:valid {
 //  const submit_btn = document.getElementById("submit_btn");
 //  const result = document.getElementById("result");
 
- //const ENDPOINT = "http://127.0.0.1:5000/predict";
-  const ENDPOINT = "http://192.144.14.184:5000/predict";
+ const ENDPOINT = "http://127.0.0.1:5000/predict";
+ // const ENDPOINT = "http://192.144.14.184:5000/predict";
 
   submit_btn.addEventListener("click", submit_click, false);
 
   function submit_click(event) {
     event.preventDefault();
-    if (area.valid){
+    if (total_meters.valid){
       console.log("Valid!");
     }
     let warn = "Wrong connection!";
-    let house_params = {area: area.value};
+    let house_params = {total_meters: total_meters.value,  rooms_count:rooms_count.value, author_type: author_type.value, floor: floor.value, street: street.value, underground: underground.value, floors_count:floors_count.value ,district: district.value};
     postJSON(house_params, token.value).then((response) => {
       const price = response['price'];
       result.innerHTML = price;

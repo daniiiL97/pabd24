@@ -2,10 +2,8 @@
 import argparse
 import logging
 import pandas as pd
-from sklearn.linear_model import LinearRegression
 from joblib import dump
-from sklearn.ensemble import RandomForestRegressor
-
+from catboost import CatBoostRegressor
 logger = logging.getLogger(__name__)
 logging.basicConfig(
     filename='log/train_model.log',
@@ -14,19 +12,21 @@ logging.basicConfig(
     format='%(asctime)s %(message)s')
 
 TRAIN_DATA = 'data/proc/train.csv'
-MODEL_SAVE_PATH = 'models/random_forest.joblib'
+MODEL_SAVE_PATH = 'models/catboost.joblib'
 
 
 def train_model(train_data_path, model_save_path):
     df_train = pd.read_csv(train_data_path)
-    x_train = df_train[['total_meters']]
+    X_train = df_train[['rooms_count', 'author_type', 'floor', 'street',
+       'underground', 'floors_count', 'district', 'total_meters']]
     y_train = df_train['price']
 
-    linear_model = RandomForestRegressor()
-    linear_model.fit(x_train, y_train)
-    dump(linear_model, model_save_path)
+    cat_features = ['author_type', 'district', 'street', 'underground']
+    model = CatBoostRegressor(cat_features=cat_features)
+    model.fit(X_train, y_train)
+    dump(model, model_save_path)
 
-    r2 = linear_model.score(x_train, y_train)
+    r2 = model.score(X_train, y_train)
     #c = int(linear_model.coef_[0])
     #inter = int(linear_model.intercept_)
 
