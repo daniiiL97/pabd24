@@ -52,7 +52,7 @@ pip install -r requirements.txt
 ```gunicorn -b 0.0.0.0 src.predict_app:app --daemon```
 Адрес:
 http://192.144.14.184:8000/predict
-### 8. Отбор фичей и новая модель 
+### 8. Отбор фичей для новой модели
 ([Отбор_фичей_пабд.ipynb](https://github.com/daniiiL97/pabd24/blob/floor_features/%D0%9E%D1%82%D0%B1%D0%BE%D1%80_%D1%84%D0%B8%D1%87%D0%B5%D0%B9_%D0%BF%D0%B0%D0%B1%D0%B4.ipynb))
 
 ### 9. Использование сервиса через веб интерфейс 
