@@ -61,6 +61,6 @@ http://192.144.14.184:8000/predict
 
 ### 10. Использование сервиса через веб интерфейс 
 
-docker run -dp 8000:8000 dan4ik97/pabd24:latest
+```docker run -dp 8000:8000 dan4ik97/pabd24:latest```
 
 
